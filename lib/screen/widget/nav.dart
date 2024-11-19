@@ -68,7 +68,7 @@ class NavDrawer extends StatelessWidget {
         title: const Text('ออกจากระบบ'),
         onTap: () {
           Navigator.push(
-            context, MaterialPageRoute(builder: (context) => LoginScreen()));
+            context, MaterialPageRoute(builder: (context) => LogInScreen()));
         },
       ),
     ],

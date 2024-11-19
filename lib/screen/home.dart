@@ -1,7 +1,8 @@
-import 'package:app/screen/functions/healthy.dart';
-import 'package:app/screen/testdb.dart';
-import 'package:app/screen/widget/nav.dart';
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
+
+import '../models/snackbar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -10,169 +11,131 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
+// TODO ข้อมูลการทานยา
+const String usernameTest = "ตรีภพ";
+const String medicalTest = "Retinal A";
+const String symptomTest = "ปวดศรีษะเล็กน้อย นอนหลับไม่เพียงพอ";
+const String dateTest = '12:00';
+
+// TODO ข้อมูลสุขภาพ
+const String genderTest = "ชาย";
+const String bloodType = "A";
+const String persornalInfo = "หายใจหอบหืด";
+const String feelTest = "รู้สึกกดดัน ไม่ค่อยสบายใจ";
+double weightTest = 50.0; 
+double heightTest = 170.5;
+int water = 5;
+
+
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<dynamic> users = [];
-
-// void _makePhoneCall(String phoneNumber) {
-//   final Uri launchUri = Uri(
-//     scheme: 'tel',
-//     path: phoneNumber
-//   );
-//   // เปิดแอปโทรศัพท์
-//     if (Platform.isIOS || Platform.isAndroid) {
-//       // ใช้ช่องทางระบบปฏิบัติการเพื่อเปิดโทรศัพท์
-//       // แอปจะเปิดตาม URL scheme
-//       try {
-//         MethodChannel channel = const MethodChannel("com.example.app/phone"); // เปลี่ยนชื่อช่องทางตามต้องการ
-//         channel.invokeMethod('launch', launchUri.toString());
-//       } catch (e) {
-//         print("Error: $e");
-//       }
-//     }
-//   }
+  @override
+  Widget build(BuildContext context) { 
+    // สร้าง TimeOfDay ที่เป็นเวลา ณ ตอนนี้
+        TimeOfDay now = TimeOfDay.now();
+    // แปลง TimeOfDay เป็น String เพื่อแสดงใน UI
+        String formatTime = now.format(context);
 
 
-  
-  Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.blue,
-          titleTextStyle: const TextStyle(color: Colors.white,fontSize: 24),
-          iconTheme: const IconThemeData(color: Colors.white,size: 28),
-          elevation: 0,
-          title: const Text("JaiD",style: TextStyle(fontWeight: FontWeight.bold),),
-          actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.qr_code))],
+    body: SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Center( // Aligns the Card in the center horizontally
+              child: Container(
+                width: 400,
+                height: 300,
+                child: Card(
+                  color: Colors.blue,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12)
+                  ),
+                  elevation: 8,
+                  child: Padding( // Padding inside the Card
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset('lib/images/jaiD_logo.png', width: 150, height: 150),
+                        const SizedBox(height: 16), // Space between elements
+                        const Text('JaiD แอปพลิเคชัน',style: TextStyle(color: Colors.white,fontSize: 36,fontWeight: FontWeight.bold),),
+                        const SizedBox(height: 8), // Space between elements
+                        const Text('ยินดีต้อนรับคุณ : $usernameTest 💐' ,style: TextStyle(color : Colors.white,fontSize: 16),)
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              
+            ),
+
+            Container(
+                width: 400,
+                height: 220,
+                child: Card(
+                  color: Colors.blue,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12)
+                  ),
+                  elevation: 8,
+                  child:  Padding( // Padding inside the Card
+                    padding:  const EdgeInsets.all(20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const Center(child: Text('ข้อมูลการทานยาล่าสุด',style: TextStyle(color: Colors.white,fontSize: 24,fontWeight: FontWeight.bold),)),
+                        const SizedBox(height: 8), // Space between elements
+                        const Text('ทานยาล่าสุด : $dateTest',style: TextStyle(color : Colors.white,fontSize: 16),),
+                        const Text('ชื่อยา : $medicalTest',style: TextStyle(color : Colors.white,fontSize: 16),),
+                        const Text('อาการ : $symptomTest',style: TextStyle(color : Colors.white,fontSize: 16),),
+                        const SizedBox(height: 15),
+                        Text('ต้องทานอีกเมื่อ : $formatTime',style: const TextStyle(color : Colors.white,fontSize: 20,fontWeight: FontWeight.bold),),
+                       
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+
+              Container(
+                width: 400,
+                height: 320,
+                child: Card(
+                  color: Colors.blue,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12)
+                  ),
+                  elevation: 8,
+                  child:  Padding( // Padding inside the Card
+                    padding:  const EdgeInsets.all(20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const Center(child: Text('ข้อมูลสุขภาพล่าสุด',style: TextStyle(color: Colors.white,fontSize: 24,fontWeight: FontWeight.bold),)),
+                        const SizedBox(height: 8), // Space between elements
+                        const Text('เพศ : $genderTest',style: TextStyle(color : Colors.white,fontSize: 16),),
+                        const Text('กรุ๊ปเลือด : $bloodType',style: TextStyle(color : Colors.white,fontSize: 16),),
+                        Text('ส่วนสูง : $heightTest',style: const TextStyle(color : Colors.white,fontSize: 16),),
+                        Text('น้ำหนัก : $weightTest',style: const TextStyle(color : Colors.white,fontSize: 16),),
+                        const Text('โรคส่วนตัว : $persornalInfo',style: TextStyle(color : Colors.white,fontSize: 16),),
+                        const Text('ความรู้สึกของวันนี้ : $feelTest',style: TextStyle(color : Colors.white,fontSize: 16),),
+                        Text('ปริมาณน้ำที่ดื่มไปวันนี้ : $water',style: const TextStyle(color : Colors.white,fontSize: 16),),
+                        const SizedBox(height: 15),
+                        Text('สถานะร่างกาย : ${water<8?'ดื่มน้ำน้อยไป 🥵':'ดื่มน้ำพอเหมาะ 👍'}',style: const TextStyle(color : Colors.white,fontSize: 20,fontWeight: FontWeight.bold),),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+
+              
+          ],
         ),
-        drawer: const NavDrawer(),
-        backgroundColor: Colors.white,
-        bottomNavigationBar: BottomAppBar(
-          color: Colors.blue,
-          shape: const CircularNotchedRectangle(),
-          notchMargin: 4.0,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.home,color: Colors.white,size: 40),),
-              IconButton(
-                onPressed: () {}, 
-                icon: Icon(Icons.lock_clock,color: Colors.white,size: 40,)),
-              IconButton(
-                onPressed: () {}, 
-                icon: Icon(Icons.chat,color: Colors.white,size: 40)),
-              IconButton(
-                onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => HealthyScreen()));}, 
-                icon: Icon(Icons.task,color: Colors.white,size: 40)),
-            ],
-          ),
-        ),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.fromLTRB(45, 50.0, 45, 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text('ยินดีต้อนรับ !',
-                  style: TextStyle(
-                    fontSize: 26,
-                    fontWeight: FontWeight.bold
-                  ),),
-                const Text('Admin',
-                  style: TextStyle(
-                    fontSize: 18,
-                  ),),
-                
-
-                const SizedBox(height: 500),
-
-                  
-            ],),),
-        
-      
-    );
-  }
-}
-
-
-
-
-// class CustomAppBar extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Column(
-//         children: [
-//           // Custom AppBar
-//           Container(
-//             padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top + 10, left: 16, right: 16, bottom: 20),
-//             decoration: BoxDecoration(
-//               color: Colors.white,
-//               borderRadius: BorderRadius.only(
-//                 bottomLeft: Radius.circular(24),
-//                 bottomRight: Radius.circular(24),
-//               ),
-//               boxShadow: [
-//                 BoxShadow(
-//                   color: Colors.grey.withOpacity(0.3),
-//                   spreadRadius: 2,
-//                   blurRadius: 10,
-//                   offset: Offset(0, 3), // changes position of shadow
-//                 ),
-//               ],
-//             ),
-//             child: Column(
-//               children: [
-//                 Row(
-//                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                   children: [
-//                     CircleAvatar(
-//                       radius: 30,
-//                       backgroundColor: Colors.grey[300],
-//                       // Replace with user profile image if needed
-//                     ),
-//                     Column(
-//                       crossAxisAlignment: CrossAxisAlignment.start,
-//                       children: [
-//                         Text(
-//                           'ยินดีต้อนรับคุณ',
-//                           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-//                         ),
-//                         Text(
-//                           'administrator',
-//                           style: TextStyle(fontSize: 16, color: Colors.grey[600]),
-//                         ),
-//                       ],
-//                     ),
-//                     CircleAvatar(
-//                       radius: 20,
-//                       backgroundColor: Colors.grey[300],
-//                       // Replace with other icon if needed
-//                     ),
-//                   ],
-//                 ),
-//                 SizedBox(height: 20),
-//                 // Additional buttons or icons below the main row
-//                 Row(
-//                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-//                   children: List.generate(
-//                     4,
-//                     (index) => Container(
-//                       height: 50,
-//                       width: 50,
-//                       color: Colors.grey[300],
-//                     ),
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           ),
-//           // Other content below the custom AppBar
-//           Expanded(
-//             child: Center(child: Text("Your content here")),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
+      ),
+    ));
+}}
