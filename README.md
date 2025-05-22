@@ -3,9 +3,9 @@
 A new Flutter project.
 
 # Installing
-flutter doctor
-flutter clean
-flutter pub dev
+- flutter doctor
+- flutter clean
+- flutter pub dev
 
 ## Getting Started
 
