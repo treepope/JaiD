@@ -2,6 +2,11 @@
 
 A new Flutter project.
 
+# Installing
+flutter doctor
+flutter clean
+flutter pub dev
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
